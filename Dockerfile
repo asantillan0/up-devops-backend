@@ -22,8 +22,8 @@ WORKDIR /app
 # Copiar solo los archivos necesarios desde la etapa de construcción
 COPY --from=builder /app /app
 
-# Verificar que las dependencias estén instaladas
-RUN pip list  # Esto te permitirá ver las librerías instaladas
+# Instalar las dependencias en la imagen final
+RUN pip install --no-cache-dir -r requirements.txt  # Asegúrate de instalar aquí también
 
 # Exponer el puerto en el que se ejecuta la aplicación
 EXPOSE 3000
