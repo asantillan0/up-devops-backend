@@ -22,6 +22,9 @@ WORKDIR /app
 # Copiar solo los archivos necesarios desde la etapa de construcción
 COPY --from=builder /app /app
 
+# Verificar que las dependencias estén instaladas
+RUN pip list  # Esto te permitirá ver las librerías instaladas
+
 # Exponer el puerto en el que se ejecuta la aplicación
 EXPOSE 3000
 
