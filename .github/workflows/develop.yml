@@ -5,6 +5,10 @@ on:
     branches:
       - develop
 
+  push:
+    branches:
+      - develop
+
 permissions:
   id-token: write
   contents: read
@@ -30,7 +34,7 @@ jobs:
           pytest test_app.py
 
   deploy-to-dockerhub:
-    if: github.event.pull_request.merged == true
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
