@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify(status='healthy')
+    return jsonify(status='healthy!')
 
 @app.route('/items', methods=['POST'])
 def create_item():
