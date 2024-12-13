@@ -1,3 +1,6 @@
+import newrelic.agent
+newrelic.agent.initialize('newrelic.ini')
+
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
