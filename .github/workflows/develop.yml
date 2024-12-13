@@ -52,3 +52,7 @@ jobs:
       - name: Push Docker image to DockerHub
         run: |
           docker push asantillan/up-devops-backend:latest
+          
+      - name: Trigger Render Deploy Hook
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
