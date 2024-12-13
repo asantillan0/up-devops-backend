@@ -6,8 +6,8 @@ on:
       - develop
 
 permissions:
-  id-token: write   
-  contents: read    
+  id-token: write
+  contents: read
 
 jobs:
   build:
@@ -28,3 +28,23 @@ jobs:
       - name: Run tests
         run: |
           pytest test_app.py
+
+  deploy-to-dockerhub:
+    if: github.event.pull_request.merged == true
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to DockerHub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "asantillan" --password-stdin
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t asantillan/up-devops-backend:latest .
+
+      - name: Push Docker image to DockerHub
+        run: |
+          docker push asantillan/up-devops-backend:latest
